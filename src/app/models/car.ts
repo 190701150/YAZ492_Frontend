@@ -6,4 +6,5 @@ export interface Car {
     plate: string;
     carState: number;
     modelYear: number;
+    dailyPrice: number;
 }

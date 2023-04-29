@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {IonicModule, LoadingController} from '@ionic/angular';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule]
+    imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule]
 })
-export class LoginPage implements OnInit {
-  loginForm: FormGroup
+export class RegisterPage implements OnInit {
+  registerForm: FormGroup
+
   constructor(
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
@@ -23,31 +24,33 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.createLoginForm();
+    this.createRegisterForm();
   }
 
-  createLoginForm(){
-    this.loginForm = this.formBuilder.group({
+  createRegisterForm(){
+    this.registerForm = this.formBuilder.group({
       email: ["", [Validators.email, Validators.required]],
       password: ["", Validators.required],
-      authenticatorCode: [""]
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
+      authenticatorCode: [""],
     })
   }
 
-  async login(){
+  async register(){
     const loading = await this.loadingController.create({
       message: "Loading"
     })
     await loading.present();
 
-    this.httpClient.post<any>(`${environment.apiUrl}Auth/Login`, this.loginForm.value).subscribe({
+    this.httpClient.post<any>(`${environment.apiUrl}Auth/Register`, this.registerForm.value).subscribe({
       next: (value) => {
         loading.remove()
-        localStorage.setItem("token", value.accessToken.token)
         this.router.navigateByUrl("")
       },
     })
   }
+
 
 
 }

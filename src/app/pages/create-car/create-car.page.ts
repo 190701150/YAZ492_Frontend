@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {IonicModule, LoadingController} from '@ionic/angular';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-create-car',
+  templateUrl: './create-car.page.html',
+  styleUrls: ['./create-car.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule]
 })
-export class LoginPage implements OnInit {
-  loginForm: FormGroup
+export class CreateCarPage implements OnInit {
+  addCarForm: FormGroup
+
   constructor(
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
@@ -23,31 +24,35 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.createLoginForm();
+    this.createAddCarForm();
   }
 
-  createLoginForm(){
-    this.loginForm = this.formBuilder.group({
-      email: ["", [Validators.email, Validators.required]],
-      password: ["", Validators.required],
-      authenticatorCode: [""]
-    })
+  createAddCarForm(){
+    this.addCarForm = this.formBuilder.group({
+      colorId: [1, Validators.required],
+      modelId: [1, Validators.required],
+      rentalBranchId: [1, Validators.required],
+      carState: [1, Validators.required],
+      kilometer: [0, Validators.required],
+      modelYear: [0, Validators.required],
+      plate: ['', Validators.required],
+      minFindeksCreditRate: [1, Validators.required],
+      authenticatorCode: [""],
+    });
   }
 
-  async login(){
+  async createcar(){
     const loading = await this.loadingController.create({
       message: "Loading"
     })
     await loading.present();
 
-    this.httpClient.post<any>(`${environment.apiUrl}Auth/Login`, this.loginForm.value).subscribe({
+    this.httpClient.post<any>(`${environment.apiUrl}Cars`, this.addCarForm.value).subscribe({
       next: (value) => {
         loading.remove()
-        localStorage.setItem("token", value.accessToken.token)
         this.router.navigateByUrl("")
       },
     })
   }
-
 
 }
