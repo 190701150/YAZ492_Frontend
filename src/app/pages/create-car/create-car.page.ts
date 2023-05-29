@@ -54,5 +54,8 @@ export class CreateCarPage implements OnInit {
       },
     })
   }
+  goToCreateModel(){
+    this.router.navigateByUrl("createmodel")
+  }
 
 }

@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {Component, inject, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {PaginatedResult} from "../../models/paginatedResult";
 import {User} from "../../models/user";
 import {environment} from "../../../environments/environment";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AlertController, IonicModule} from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -16,6 +16,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class Tab3Page implements OnInit {
   user: User
+  router: Router = inject(Router)
 
   constructor(private httpClient: HttpClient,private readonly activatedRoute: ActivatedRoute) {
   }
@@ -43,6 +44,8 @@ export class Tab3Page implements OnInit {
       }
     });
   }
+
+
 }
 
 //this.httpClient.get<PaginatedResult<User>>(`${environment.apiUrl}Users/{Id}`).subscribe({

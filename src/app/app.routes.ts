@@ -27,4 +27,9 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/create-car/create-car.page').then( m => m.CreateCarPage),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'createmodel',
+    loadComponent: () => import('./pages/create-model/create-model.page').then( m => m.CreateModelPage),
+    canActivate: [AuthGuard]
+  },
 ];
