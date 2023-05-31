@@ -37,7 +37,7 @@ export class Tab1Page implements OnInit{
   }
 
   getCars(){
-    this.httpClient.get<PaginatedResult<Car>>(`${environment.apiUrl}Cars?Page=0&PageSize=10`).subscribe({
+    this.httpClient.get<PaginatedResult<Car>>(`${environment.apiUrl}Cars?Page=0&PageSize=1000`).subscribe({
       next: (value) => {
         this.paginatedCarResult = value;
         console.log(value)
@@ -46,7 +46,7 @@ export class Tab1Page implements OnInit{
   }
 
   getModels(){
-    this.httpClient.get<PaginatedResult<Model>>(`${environment.apiUrl}Models?Page=0&PageSize=10`).subscribe({
+    this.httpClient.get<PaginatedResult<Model>>(`${environment.apiUrl}Models?Page=0&PageSize=1000`).subscribe({
       next: (value) => {
         this.paginatedModelResult = value;
         console.log(value)
@@ -93,7 +93,7 @@ export class Tab1Page implements OnInit{
     }
   }
 
-  goToCarDetails(carId: number){
+  goToBuy(carId: number){
     this.alertController.create({
       header: "Tebrikler",
       message: "Araç kiralama başarılı!",
@@ -101,10 +101,11 @@ export class Tab1Page implements OnInit{
     }).then(controller => controller.present())
   }
 
-  goToCreateCar(){
-    this.router.navigateByUrl("createcar")
+  goToCreateModel(){
+    this.router.navigateByUrl("createmodel")
   }
 
-
-
+  goToCarDetails(carId: number){
+    this.router.navigateByUrl("/car-details/:carId")
+  }
 }

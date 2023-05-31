@@ -50,6 +50,7 @@
           </div>
           <div>
             <ion-icon name="receipt-outline" class="text-4xl" (click)="goToCarDetails(car.id)"></ion-icon>
+            <ion-icon name="cash-outline" class="text-4xl" (click)="goToBuy(car.id)"></ion-icon>
             <ion-icon name="heart-outline" class="text-4xl" (click)="favorite(car)"></ion-icon>
           </div>
         </div>
@@ -59,7 +60,7 @@
   </ion-list>
 
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="goToCreateCar()">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="goToCreateModel()">
     <ion-fab-button>
       <ion-icon name="add-circle-outline"></ion-icon>
     </ion-fab-button>

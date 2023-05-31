@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {IonicModule, LoadingController} from '@ionic/angular';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Router} from "@angular/router";
+import { ApplicationRef } from '@angular/core';
 import {environment} from "../../../environments/environment";
 
 @Component({
@@ -20,6 +21,7 @@ export class CreateModelPage implements OnInit {
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private router: Router,
+    private appRef: ApplicationRef,
   ) { }
   ngOnInit() {
     this.createAddModelForm();
@@ -49,5 +51,9 @@ export class CreateModelPage implements OnInit {
         this.router.navigateByUrl("")
       },
     })
+  }
+
+  goToCreateCar() {
+    this.router.navigateByUrl("createcar")
   }
 }
