@@ -105,7 +105,8 @@ export class Tab1Page implements OnInit{
     this.router.navigateByUrl("createmodel")
   }
 
-  goToCarDetails(carId: number){
-    this.router.navigateByUrl("/car-details/:carId")
+  goToCarDetails(carId: number) {
+    this.router.navigateByUrl(`/car-details/${carId}`);
   }
+
 }

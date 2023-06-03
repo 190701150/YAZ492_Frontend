@@ -1,8 +1,13 @@
+import {Validators} from "@angular/forms";
+
 export interface Model {
   id: number,
+  brandId: number,
+  fuelId: number,
+  transmissionId: number,
   brandName: string,
-  fuelName: string,
   transmissionName: string,
+  fuelName: string,
   name: string,
   dailyPrice: number,
   imageUrl: string,
